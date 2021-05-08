@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
+import {Icon} from 'react-native-elements';
 
 const Home: React.FC = () => {
   const [search, setSearch] = useState('');
@@ -26,7 +26,14 @@ const Home: React.FC = () => {
               flexGrow: 1,
             }}
           />
-         
+
+          <Icon
+            name="search"
+            type="evilicon"
+            color="#000"
+            onPress={() => console.log('hello')}
+           size={30}
+          />
         </View>
       </LinearGradient>
     </SafeAreaView>
@@ -48,5 +55,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
+    paddingRight:10
   },
 });

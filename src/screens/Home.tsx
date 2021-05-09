@@ -10,13 +10,23 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {Icon} from 'react-native-elements';
 import Movies from '../components/Movies';
+import {getsearchdata} from '../utils/api';
 
 const Home: React.FC = () => {
   const [search, setSearch] = useState('');
+  const [data, setData] = useState<any>([]);
+
+  function getSearch() {
+    console.log(search);
+    getsearchdata(search).then(response => {
+      console.log(JSON.stringify(response.data));
+      setData(response.data);
+    });
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={['#fdfffe', '#95dbd4']} style={{flex: 1}}>
+      <LinearGradient colors={['#f0f0f0', '#f2c2c6']} style={{flex: 1}}>
         <View style={styles.searchContainer}>
           <TextInput
             placeholder="Search..."
@@ -32,11 +42,11 @@ const Home: React.FC = () => {
             name="search"
             type="evilicon"
             color="#000"
-            onPress={() => console.log('hello')}
+            onPress={() => getSearch()}
             size={30}
           />
         </View>
-        <Movies />
+        <Movies/>
       </LinearGradient>
     </SafeAreaView>
   );

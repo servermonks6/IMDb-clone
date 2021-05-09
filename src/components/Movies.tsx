@@ -24,7 +24,7 @@ const Movies: FC = () => {
       }}>
       <View
         style={{
-          backgroundColor: '#f2c2c6',
+          backgroundColor: '#95dbd4',
           flex: 1,
           height: 50,
           justifyContent: 'center',

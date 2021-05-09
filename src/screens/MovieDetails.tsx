@@ -14,7 +14,7 @@ const MovieDetails: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={['#fdfffe', '#95dbd4']} style={{flex: 1}}>
+      <LinearGradient colors={['#f0f0f0', '#f2c2c6']} style={{flex: 1}}>
         <Text>Details</Text>
       </LinearGradient>
     </SafeAreaView>

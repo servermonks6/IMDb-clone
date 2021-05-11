@@ -9,37 +9,45 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {Text} from 'react-native-elements';
+import {Image, Text} from 'react-native-elements';
 import {DATA} from '../data';
 
-const Movies: FC = () => {
+interface MoviesProps {
+  data: any;
+}
+
+const Movies: FC<MoviesProps> = ({data}) => {
   const renderItem = ({item}: any) => (
     <View
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        height: 50,
         marginHorizontal: 20,
-        marginBottom: 8,
+        marginBottom: 10,
       }}>
-      <View
+      <TouchableOpacity
         style={{
+          flexDirection: 'row',
           backgroundColor: '#95dbd4',
           flex: 1,
-          height: 50,
-          justifyContent: 'center',
-        }}>
-        <TouchableOpacity 
+          alignItems: 'center',
+        }}
         // onPress={() => navigation.navigate('GRDetails', {gr: item})}
-        >
+      >
+        <Image source={{uri: item.image}} style={{height: 100, width: 75}} />
         <Text
-          style={{color: '#fff', fontSize: 16, marginHorizontal: 8}}
+          style={{
+            color: '#fff',
+            fontSize: 19,
+            fontWeight: 'bold',
+            marginHorizontal: 8,
+            width:"60%"
+          }}
           numberOfLines={2}
           ellipsizeMode={'tail'}>
-          {item.id}-{item.name}
+          {item.title}
         </Text>
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 
@@ -54,7 +62,7 @@ const Movies: FC = () => {
           }}>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={DATA}
+            data={data.titles}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />

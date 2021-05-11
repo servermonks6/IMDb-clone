@@ -46,7 +46,7 @@ const Home: React.FC = () => {
             size={30}
           />
         </View>
-        <Movies/>
+        <Movies data={data}/>
       </LinearGradient>
     </SafeAreaView>
   );

@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {
   Pressable,
   SafeAreaView,
@@ -8,10 +8,20 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { getmovieDetails } from '../utils/api';
 
-const MovieDetails: React.FC = () => {
-  const [search, setSearch] = useState('');
+const MovieDetails: FC = ({route, navigation}: any) => {
+  const {id} = route.params;
+  console.log({id});
 
+  useEffect(() => {
+    getmovieDetails(id).then(response => {
+      console.log(JSON.stringify(response.data));
+
+      // setData(response.data);
+    });
+  }, []);
+  
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={['#f0f0f0', '#f2c2c6']} style={{flex: 1}}>

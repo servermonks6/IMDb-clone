@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, {FC} from 'react';
 import {
   FlatList,
@@ -17,6 +18,8 @@ interface MoviesProps {
 }
 
 const Movies: FC<MoviesProps> = ({data}) => {
+  const navigation = useNavigation();
+  
   const renderItem = ({item}: any) => (
     <View
       style={{
@@ -32,7 +35,7 @@ const Movies: FC<MoviesProps> = ({data}) => {
           flex: 1,
           alignItems: 'center',
         }}
-        // onPress={() => navigation.navigate('GRDetails', {gr: item})}
+        onPress={() => navigation.navigate('MovieDetails', {id: item?.id})}
       >
         <Image source={{uri: item.image}} style={{height: 100, width: 75}} />
         <Text

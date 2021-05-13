@@ -14,7 +14,13 @@ export function getsearchdata(keyword: string) {
   });
 }
 
-// export function getpokemonDetails(id: any) {
-//   console.log('calling get api.....');
-//   return axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-// }
+export function getmovieDetails(id: string) {
+  console.log('calling get api.....');
+  return axios.get(`${baseUrl}/film/${id}`, {
+    headers: {
+      'x-rapidapi-key': '3e20e0658dmsh845965e62924feep1352a2jsn6131ea803460',
+      'x-rapidapi-host':
+        'imdb-internet-movie-database-unofficial.p.rapidapi.com',
+    },
+  });
+}

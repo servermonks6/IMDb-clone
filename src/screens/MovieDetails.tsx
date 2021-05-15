@@ -38,7 +38,7 @@ const MovieDetails: FC = ({route, navigation}: any) => {
             onPress: navigation.goBack,
           }}
           centerComponent={{
-            text: 'Movie DEtails',
+            text: 'Movie Details',
             style: {color: '#fff', fontSize: 18},
           }}
         />
@@ -68,7 +68,7 @@ const MovieDetails: FC = ({route, navigation}: any) => {
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.text}>rating:</Text>
               <Text style={styles.text}>
-                {data.rating} ({data.rating_votes}){' '}
+                {data.rating} ( {data.rating_votes} votes )
               </Text>
             </View>
           )}
@@ -84,6 +84,7 @@ const MovieDetails: FC = ({route, navigation}: any) => {
                     textAlign: 'center',
                     alignSelf: 'center',
                     fontWeight: 'bold',
+                    textDecorationLine: 'underline'
                   },
                 ]}>
                 Casts

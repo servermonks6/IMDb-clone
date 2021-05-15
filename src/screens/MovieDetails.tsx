@@ -29,6 +29,8 @@ const MovieDetails: FC = ({route, navigation}: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
+     
+      <LinearGradient colors={['#f0f0f0', '#f2c2c6']} style={{height: '100%'}}>
       <Header
         leftComponent={{
           icon: 'arrow-back',
@@ -40,28 +42,34 @@ const MovieDetails: FC = ({route, navigation}: any) => {
           style: {color: '#fff', fontSize: 18},
         }}
       />
-      <LinearGradient colors={['#f0f0f0', '#f2c2c6']} style={{height: '100%'}}>
-        <View style={{alignItems:"center",marginTop:25}}>
-          <Image
-            source={{uri: data?.poster}}
-            style={{
-              height: Deviceheight / 2.5,
-              width: Deviceheight / 3,
-              marginHorizontal: 25,
-            }}
-          />
-        </View>
+        {data.poster !== '' && (
+          <View style={{alignItems: 'center', marginTop: 25}}>
+            <Image
+              source={{uri: data?.poster}}
+              style={{
+                height: Deviceheight / 2,
+                width: Deviceheight / 2.5,
+                marginHorizontal: 25,
+              }}
+            />
+          </View>
+        )}
 
-        <Text style={styles.title}>{data.title}</Text>
-        
-        {/* <View style={{flexDirection: 'row'}}>
-          <Text style={styles.text}>height:</Text>
-          <Text style={styles.text}>{data.height}</Text>
-        </View>
+        <Text style={styles.title}>{data?.title}</Text>
+        <Text style={styles.title2}>{data?.plot}</Text>
+        {data.year !== '' && (
         <View style={{flexDirection: 'row'}}>
-          <Text style={styles.text}>weight:</Text>
-          <Text style={styles.text}>{data.weight}</Text>
-        </View> */}
+          <Text style={styles.text}>Year:</Text>
+          <Text style={styles.text}>{data?.year}</Text>
+        </View>)}
+        {data.rating !== '' && (
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.text}>rating:</Text>
+            <Text style={styles.text}>
+              {data.rating} ({data.rating_votes}){' '}
+            </Text>
+          </View>
+        )}
 
         <Divider style={styles.divider} />
       </LinearGradient>
@@ -88,9 +96,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   title2: {
-    fontSize: 25,
+    fontSize: 20,
     marginVertical: 10,
-    fontWeight: '700',
   },
   divider: {
     backgroundColor: '#b2b2b2',

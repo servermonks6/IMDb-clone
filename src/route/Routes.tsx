@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MovieDetails from '../screens/MovieDetails';
 import Home from '../screens/Home';
+import Login from '../screens/Login';
 
 const Routes: FC = () => {
   const Stack = createStackNavigator();
@@ -12,6 +13,11 @@ const Routes: FC = () => {
         screenOptions={{
           headerShown: false,
         }}>
+           <Stack.Screen
+          name="Login"
+          component={Login}
+         
+        />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="MovieDetails" component={MovieDetails} />
       </Stack.Navigator>

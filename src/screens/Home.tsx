@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {
+  ActivityIndicator,
   Pressable,
   SafeAreaView,
   StyleSheet,
@@ -15,12 +16,14 @@ import {getsearchdata} from '../utils/api';
 const Home: React.FC = () => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState<any>([]);
-
+  const [loader, setLoader] = useState<boolean>(false);
   function getSearch() {
     console.log(search);
+    setLoader(true);
     getsearchdata(search).then(response => {
       console.log(JSON.stringify(response.data));
       setData(response.data);
+      setLoader(false);
     });
   }
 
@@ -29,7 +32,7 @@ const Home: React.FC = () => {
       <LinearGradient colors={['#f0f0f0', '#f2c2c6']} style={{flex: 1}}>
         <View style={styles.searchContainer}>
           <TextInput
-            placeholder="Search..."
+            placeholder="Search Movie Name ..."
             onChangeText={search => setSearch(search)}
             style={{
               fontSize: 18,
@@ -45,8 +48,13 @@ const Home: React.FC = () => {
             onPress={() => getSearch()}
             size={30}
           />
+          
         </View>
-        <Movies data={data}/>
+        {loader ? (
+          <ActivityIndicator size="large" color="#000" />
+        ) : (
+          <Movies data={data} />
+        )}
       </LinearGradient>
     </SafeAreaView>
   );

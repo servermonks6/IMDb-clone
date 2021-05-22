@@ -1,5 +1,6 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Dimensions,
   Pressable,
   SafeAreaView,
@@ -19,12 +20,14 @@ const Deviceheight = Dimensions.get('window').height;
 const MovieDetails: FC = ({route, navigation}: any) => {
   const {id} = route.params;
   const [data, setData] = useState<any>([]);
+  const [loader, setLoader] = useState<boolean>(true);
 
   useEffect(() => {
     getmovieDetails(id).then(response => {
       console.log(JSON.stringify(response.data));
 
       setData(response.data);
+      setLoader(false);
     });
   }, []);
 
@@ -42,66 +45,76 @@ const MovieDetails: FC = ({route, navigation}: any) => {
             style: {color: '#fff', fontSize: 18},
           }}
         />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {data.poster !== '' && (
-            <View style={{alignItems: 'center', marginTop: 25}}>
-              <Image
-                source={{uri: data?.poster}}
-                style={{
-                  height: Deviceheight / 2,
-                  width: Deviceheight / 2.5,
-                  marginHorizontal: 25,
-                }}
-              />
-            </View>
-          )}
-
-          <Text style={styles.title}>{data?.title}</Text>
-          <Text style={styles.title2}>{data?.plot}</Text>
-          {data.year !== '' && (
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.text}>Year:</Text>
-              <Text style={styles.text}>{data?.year}</Text>
-            </View>
-          )}
-          {data.rating !== '' && (
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.text}>rating:</Text>
-              <Text style={styles.text}>
-                {data.rating} ( {data.rating_votes} votes )
-              </Text>
-            </View>
-          )}
-
-          <Divider style={styles.divider} />
-
-          {data?.cast?.length !== 0 && (
-            <>
-              <Text
-                style={[
-                  styles.title2,
-                  {
-                    textAlign: 'center',
-                    alignSelf: 'center',
-                    fontWeight: 'bold',
-                    textDecorationLine: 'underline'
-                  },
-                ]}>
-                Casts
-              </Text>
-              <View>
-                {data?.cast?.map((item: any) => {
-                  return (
-                    <View style={{flexDirection: 'row',marginBottom:10}} key={item.actor_id}>
-                      <Text style={[styles.text,{width:"45%"}]}>{item.actor}</Text>
-                      <Text style={[styles.text,{width:"40%"}]}>{item.character}</Text>
-                    </View>
-                  );
-                })}
+        {loader ? (
+          <ActivityIndicator size="large" color="#000" />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {data.poster !== '' && (
+              <View style={{alignItems: 'center', marginTop: 25}}>
+                <Image
+                  source={{uri: data?.poster}}
+                  style={{
+                    height: Deviceheight / 2,
+                    width: Deviceheight / 2.5,
+                    marginHorizontal: 25,
+                  }}
+                />
               </View>
-            </>
-          )}
-        </ScrollView>
+            )}
+
+            <Text style={styles.title}>{data?.title}</Text>
+            <Text style={styles.title2}>{data?.plot}</Text>
+            {data.year !== '' && (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.text}>Year:</Text>
+                <Text style={styles.text}>{data?.year}</Text>
+              </View>
+            )}
+            {data.rating !== '' && (
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.text}>rating:</Text>
+                <Text style={styles.text}>
+                  {data.rating} ( {data.rating_votes} votes )
+                </Text>
+              </View>
+            )}
+
+            <Divider style={styles.divider} />
+
+            {data?.cast?.length !== 0 && (
+              <>
+                <Text
+                  style={[
+                    styles.title2,
+                    {
+                      textAlign: 'center',
+                      alignSelf: 'center',
+                      fontWeight: 'bold',
+                      textDecorationLine: 'underline',
+                    },
+                  ]}>
+                  Casts
+                </Text>
+                <View>
+                  {data?.cast?.map((item: any) => {
+                    return (
+                      <View
+                        style={{flexDirection: 'row', marginBottom: 10}}
+                        key={item.actor_id}>
+                        <Text style={[styles.text, {width: '45%'}]}>
+                          {item.actor}
+                        </Text>
+                        <Text style={[styles.text, {width: '40%'}]}>
+                          {item.character}
+                        </Text>
+                      </View>
+                    );
+                  })}
+                </View>
+              </>
+            )}
+          </ScrollView>
+        )}
       </LinearGradient>
     </SafeAreaView>
   );

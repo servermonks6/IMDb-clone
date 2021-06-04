@@ -1,4 +1,4 @@
-# MovieApp
+# IMDb-Clone
 
 ### How to run
 

@@ -9,6 +9,7 @@ yarn install
 
 ```bash
 yarn android
+
 ```
 
 ### Screenshots
